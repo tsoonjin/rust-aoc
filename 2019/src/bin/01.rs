@@ -5,7 +5,15 @@ fn read_file(filename: &str) {
     println!("In file {}", filename);
     let contents = fs::read_to_string(filename)
         .expect("Something went wrong reading the file");
-    println!("With text:\n{}", contents);
+    let split = contents.split("\n");
+    let mut sum = 0;
+    for s in split {
+        if s != "" {
+            let fuel = ((s.parse::<f32>().unwrap() / 3.0).floor() as i32) - 2;
+            sum += fuel;
+        }
+    }
+    println!("Sum: {}", sum)
 }
 
 fn main() {
